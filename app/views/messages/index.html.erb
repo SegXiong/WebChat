@@ -5,22 +5,31 @@
         <span class="glyphicon glyphicon-comment"></span> 对话
   </div>
   <div class="panel-body">
+    <% if @over_ten %>
+      <%= link_to "更早记录", '?m=all' %>
+    <% end %>
     <ul>
       <% @messages.each do |message| %>
         <% if message.content %>
-          <% user = User.find(message.user_id) %>
-          <li class="<%= message.user_id == current_user.id ? "pull-right" : "pull-left" %> clearfix">
-            <%= image_tag("http://placehold.it/50/FA6F57/fff&text=ME", :class => "image-circle") %>
-            <div class="chat-body clearfix">
-              <div class="header">
-                <strong><%= user.user_name %></strong>
+          <% user = User.find_by(id: message.user_id) %>
+          <li class="clearfix dis-block">
+            <div class="<%= message.user_id == current_user.id ? "pull-right" : "pull-left" %>">
+              <span class="<%= message.user_id == current_user.id ? "pull-right" : "pull-left" %>">
+                <%= image_tag("http://placehold.it/50/FA6F57/fff&text=ME", :class => "image-circle") %>
+              </span>
+              &nbsp;
+              <div class="chat-body clearfix">
+                <div class="header">
+                  <strong><%= user.user_name %> :</strong>
+                </div>
+                <p>
+                  <%= message.content %>
+                  <% if user == current_user %>
+                    | <%= link_to "删除", conversation_message_path(@conversation, message), :method => :delete, :data => {:confirm => "Are you sure?"} %>
+                  <% end %>
+                </p>
               </div>
-              <p>
-                <%= message.content %>
-                <% if current_user = user %>
-                  | <%= link_to "删除", conversation_message_path(@conversation, message), :method => :delete, :data => {:confirm => "Are you sure?"} %>
-                <% end %>
-              </p>
+              &nbsp;
             </div>
           </li>
         <% end %>
@@ -33,7 +42,7 @@
         <%= f.text_area :content, :class => "form-control", :placeholder => "在此输入..." %>
         <%= f.text_field :user_id, :value => current_user.id, :type => "hidden" %>
         <span class="input-group-btn">
-          <%= f.submit "发送", :class => "btn btn-primary btn-sm" %>
+          <%= f.submit "发送", :class => "btn btn-primary btn-sm send-btn" %>
         </span>
       </div>
     <% end %>

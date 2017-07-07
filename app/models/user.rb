@@ -15,4 +15,15 @@ class User < ApplicationRecord
     self.user_name
 
   end
+
+  def unread(user, friend)
+    conversation = Conversation.between(user.id, friend.id).first
+    if !conversation.nil?
+      conversation.messages.where(:read => false, :user_id => friend.id).count
+    else
+      0
+    end
+
+  end
+
 end

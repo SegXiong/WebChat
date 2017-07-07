@@ -4,6 +4,7 @@
   <tr>
     <th>#</th>
     <th>联系人</th>
+    <th>未读消息</th>
   </tr>
   <% @conversations.each_with_index do |conversation, index| %>
     <% if conversation.sender_id == current_user.id || conversation.recipient_id == current_user.id %>
@@ -16,6 +17,7 @@
     <tr>
       <td><%= index + 1 %></td>
       <td><%= link_to recipient.user_name, conversation_messages_path(conversation) %></td>
+      <td><%= recipient.unread(current_user, recipient) %></td>
     </tr>
   <% end %>
 </table>
