@@ -5,4 +5,8 @@ Rails.application.routes.draw do
   resources :users, :only => [:index]
 
   resources :friendships
+
+  resources :conversations, :only => [:index, :create] do
+    resources :messages
+  end
 end

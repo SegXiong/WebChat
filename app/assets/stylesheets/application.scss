@@ -16,3 +16,13 @@
 
  @import "bootstrap-sprockets";
  @import "bootstrap";
+
+body {
+  li {
+    list-style-type: none;
+  }
+}
+
+.image-circle {
+  border-radius: 50%;
+}
