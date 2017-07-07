@@ -1,4 +1,8 @@
 Rails.application.routes.draw do
+  devise_for :users, :controllers => { :registrations => "users/registrations"}
+  root 'friendships#index'
 
-  devise_for :users
+  resources :users, :only => [:index]
+
+  resources :friendships
 end

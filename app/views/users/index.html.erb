@@ -1,0 +1,18 @@
+<h2>添加联系人</h2>
+
+<table class="table table-hover">
+  <tr>
+    <th>昵称</th>
+    <th>邮箱</th>
+    <th>操作</th>
+  </tr>
+  <% @users.each do |user| %>
+    <% if current_user != user && !current_user.friends.include?(user) %>
+      <tr>
+        <td><%= user.user_name %></td>
+        <td><%= user.email %></td>
+        <td><%= link_to "添加", friendships_path(:friend_id => user), :method => :post %></td>
+      </tr>
+    <% end %>
+  <% end %>
+</table>

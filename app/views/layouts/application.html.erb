@@ -9,6 +9,36 @@
   </head>
 
   <body>
-    <%= yield %>
+    <div class="container">
+      <nav class="navbar navbar-inverse">
+        <div class="navbar-head">
+          <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false">
+            <span class="sr-only">Toggle navigation</span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+          </button>
+          <%= link_to 'WebChat', root_path, class: 'navbar-brand' %>
+        </div>
+        <div id="navbar" class="navbar-collapse collapse">
+          <ul class="nav navbar-nav navbar-right">
+              <li><%= link_to "联系人", root_path %></li>
+              <% if current_user %>
+                <li><%= link_to "Hi, #{current_user.display_user_name}", root_path %></li>
+              <% end %>
+              <li><%= link_to('登出', destroy_user_session_path, :method => :delete) %></li>
+          </ul>
+        </div>
+      </nav>
+
+      <% if notice %>
+        <p class="notice alert-success"><%= notice %></p>
+      <% end %>
+      <% if alert %>
+        <p class="alert alert-danger"><%= alert %></p>
+      <% end %>
+
+      <%= yield %>
+    </div>
   </body>
 </html>

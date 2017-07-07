@@ -1,0 +1,23 @@
+<h2>联系人</h2>
+
+<div class="pull-right">
+  <%= link_to "添加联系人", users_path, :class => "btn btn-default" %>
+</div>
+
+<table class="table table-striped">
+  <tr>
+    <th>昵称</th>
+    <th>邮箱</th>
+    <th>操作</th>
+  </tr>
+  <% @friends.each do |friend| %>
+  <tr>
+    <td><%= friend.user_name %></td>
+    <td><%= friend.email %></td>
+    <td><%= link_to "删除", "#", :class => "btn btn-sm btn-danger" %> |
+        <%= link_to "聊天", "#", :class => "btn btn-sm btn-primary" %>
+    </td>
+  </tr>
+  <% end %>
+
+</table>
