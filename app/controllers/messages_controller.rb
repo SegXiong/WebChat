@@ -16,7 +16,7 @@ class MessagesController < ApplicationController
     end
     if @messages.last
       if @messages.last.user_id != current_user.id
-        @messages.where("conversation_id = ? AND user_id != ?", @conversation, current_user).each do |message|
+        @messages.each do |message|
           message.update(:read => true)
         end
 

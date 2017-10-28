@@ -9,6 +9,8 @@ class FriendshipsController < ApplicationController
   def create
     @friendship = current_user.friendships.build(:friend_id => params[:friend_id])
     if @friendship.save
+      @friend = User.find(params[:friend_id])
+      @friendship = @friend.friendships.create!(:friend_id => current_user.id)
         flash[:notice] = "添加成功"
         redirect_to users_path
     else
