@@ -17,6 +17,8 @@ class ConversationsController < ApplicationController
       # @friendship = @friend.friendships.create!(:friend_id => current_user.id)
 
     end
+    @conversation.sender_id = params[:sender_id]
+    @conversation.recipient_id = params[:recipient_id]
     redirect_to conversation_messages_path(@conversation)
 
   end

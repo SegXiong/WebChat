@@ -18,7 +18,7 @@
     <td><%= link_to "删除", friendship_path(friend), :method => :delete, :data => { :confirm => "Are you sure?" }, :class => "btn btn-sm btn-danger" %> |
         <%= link_to "聊天", conversations_path(:sender_id => current_user.id, :recipient_id => friend.id), :method => :post, :class => "btn btn-sm btn-primary" %>
     </td>
-    <td><%= friend.unread(current_user, friend) %></td>
+    <td><%= link_to friend.unread(current_user, friend), conversations_path(:sender_id => current_user.id, :recipient_id => friend.id), :method => :post %></td>
   </tr>
   <% end %>
 

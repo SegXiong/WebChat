@@ -23,7 +23,7 @@
         <div id="navbar" class="navbar-collapse collapse">
           <ul class="nav navbar-nav navbar-right">
             <li><%= link_to "联系人", root_path %></li>
-            <li><%= link_to "聊天记录", conversations_path %></li>          
+            <!-- <li><%= link_to "聊天记录", conversations_path %></li>           -->
             <% if current_user %>
               <li><%= link_to "Hi, #{current_user.display_user_name}", root_path %></li>
             <% end %>
